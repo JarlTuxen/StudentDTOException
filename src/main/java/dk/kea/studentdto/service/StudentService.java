@@ -64,11 +64,13 @@ public class StudentService {
     }
 
     public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO) {
+        /*
         Student student = new Student();
         student.setName(studentRequestDTO.name());
         student.setPassword(studentRequestDTO.password());
         student.setBornDate(studentRequestDTO.bornDate());
         student.setBornTime(studentRequestDTO.bornTime());
+         */
         /*
         // Use Builder to create student
         Student student = Student.builder()
@@ -79,6 +81,12 @@ public class StudentService {
                 .build();
         */
 
+        Student student = new Student(
+                studentRequestDTO.name(),
+                studentRequestDTO.password(),
+                studentRequestDTO.bornDate(),
+                studentRequestDTO.bornTime()
+        );
         student = studentRepository.save(student);
 
         return new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());

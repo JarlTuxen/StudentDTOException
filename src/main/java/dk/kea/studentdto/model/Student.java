@@ -29,8 +29,9 @@ public class Student {
 
     private LocalTime bornTime;
 
-    public Student(String name, LocalDate bornDate, LocalTime bornTime) {
+    public Student(String name, String password, LocalDate bornDate, LocalTime bornTime) {
         this.name = name;
+        this.password = password;
         this.bornDate = bornDate;
         this.bornTime = bornTime;
     }
