@@ -35,7 +35,7 @@ public class StudentService {
         /*
         // Using stream and map with lambda
         return studentRepository.findAll().stream()
-                .map(student -> new StudentResponseDTO(student.getId(), student.getName(), student.getBirthday()))
+                .map(student -> new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime()))
                 .collect(Collectors.toList());*/
     }
 
