@@ -1,4 +1,4 @@
-package dk.kea.studentdto.dto;
+package dk.kea.studentdtoexception.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

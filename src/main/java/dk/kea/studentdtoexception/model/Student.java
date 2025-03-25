@@ -1,4 +1,4 @@
-package dk.kea.studentdto.model;
+package dk.kea.studentdtoexception.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

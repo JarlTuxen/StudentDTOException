@@ -1,15 +1,13 @@
-package dk.kea.studentdto.service;
+package dk.kea.studentdtoexception.service;
 
-import dk.kea.studentdto.dto.StudentRequestDTO;
-import dk.kea.studentdto.dto.StudentResponseDTO;
-import dk.kea.studentdto.mapper.StudentMapper;
-import dk.kea.studentdto.model.Student;
-import dk.kea.studentdto.repository.StudentRepository;
+import dk.kea.studentdtoexception.dto.StudentRequestDTO;
+import dk.kea.studentdtoexception.dto.StudentResponseDTO;
+import dk.kea.studentdtoexception.mapper.StudentMapper;
+import dk.kea.studentdtoexception.model.Student;
+import dk.kea.studentdtoexception.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

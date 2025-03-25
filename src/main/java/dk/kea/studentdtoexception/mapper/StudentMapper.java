@@ -1,8 +1,8 @@
-package dk.kea.studentdto.mapper;
+package dk.kea.studentdtoexception.mapper;
 
-import dk.kea.studentdto.dto.StudentRequestDTO;
-import dk.kea.studentdto.dto.StudentResponseDTO;
-import dk.kea.studentdto.model.Student;
+import dk.kea.studentdtoexception.dto.StudentRequestDTO;
+import dk.kea.studentdtoexception.dto.StudentResponseDTO;
+import dk.kea.studentdtoexception.model.Student;
 import org.springframework.stereotype.Component;
 
 @Component

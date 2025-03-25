@@ -1,4 +1,4 @@
-package dk.kea.studentdto;
+package dk.kea.studentdtoexception;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

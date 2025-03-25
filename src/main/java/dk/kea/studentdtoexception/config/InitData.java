@@ -1,7 +1,7 @@
-package dk.kea.studentdto.config;
+package dk.kea.studentdtoexception.config;
 
-import dk.kea.studentdto.model.Student;
-import dk.kea.studentdto.repository.StudentRepository;
+import dk.kea.studentdtoexception.model.Student;
+import dk.kea.studentdtoexception.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class InitData implements CommandLineRunner {
     StudentRepository studentRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Student s1 = new Student();
         s1.setName("Bruce");
         s1.setPassword("TheAppBruce!");

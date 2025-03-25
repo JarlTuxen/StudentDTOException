@@ -1,8 +1,8 @@
-package dk.kea.studentdto.api;
+package dk.kea.studentdtoexception.api;
 
-import dk.kea.studentdto.dto.StudentRequestDTO;
-import dk.kea.studentdto.dto.StudentResponseDTO;
-import dk.kea.studentdto.service.StudentService;
+import dk.kea.studentdtoexception.dto.StudentRequestDTO;
+import dk.kea.studentdtoexception.dto.StudentResponseDTO;
+import dk.kea.studentdtoexception.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
