@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
             StudentNotFoundException ex,
             WebRequest request
     ) {
-        ErrorResponse error = new ErrorResponse(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
                 "Not Found",
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
                 request.getDescription(false)
         );
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     // Generic exception handler for unexpected errors
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
             Exception ex,
             WebRequest request
     ) {
-        ErrorResponse error = new ErrorResponse(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal Server Error",
@@ -41,6 +41,6 @@ public class GlobalExceptionHandler {
                 request.getDescription(false)
         );
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 }
