@@ -17,13 +17,8 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Student s1 = new Student();
-        s1.setName("Bruce");
-        s1.setPassword("TheAppBruce!");
-        s1.setBornDate(LocalDate.of(2010, 11, 12));
-        s1.setBornTime(LocalTime.of(10, 11, 12));
-        studentRepository.save(s1);
         //ChatGPT testdata
+        studentRepository.save(new Student("Bruce", "TheAppBruce!",LocalDate.of(2010, 11, 12), LocalTime.of(10, 11, 12)));
         studentRepository.save(new Student("Alice", "1234",LocalDate.of(2008, 5, 22), LocalTime.of(8, 30, 45)));
         studentRepository.save(new Student("John", "", LocalDate.of(2012, 7, 9), LocalTime.of(15, 20, 30)));
         studentRepository.save(new Student("Diana", "password", LocalDate.of(2009, 1, 19), LocalTime.of(11, 45, 0)));
@@ -33,6 +28,5 @@ public class InitData implements CommandLineRunner {
         studentRepository.save(new Student("Sophia", "qwerty", LocalDate.of(2014, 10, 2), LocalTime.of(7, 20, 55)));
         studentRepository.save(new Student("Liam", "superman", LocalDate.of(2010, 12, 31), LocalTime.of(13, 35, 15)));
         studentRepository.save(new Student("Ava", "trustno1", LocalDate.of(2006, 9, 18), LocalTime.of(17, 25, 35)));
-
     }
 }
