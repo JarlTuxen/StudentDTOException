@@ -2,6 +2,7 @@ package dk.kea.studentdtoexception.service;
 
 import dk.kea.studentdtoexception.dto.StudentRequestDTO;
 import dk.kea.studentdtoexception.dto.StudentResponseDTO;
+import dk.kea.studentdtoexception.exception.StudentNotFoundException;
 import dk.kea.studentdtoexception.mapper.StudentMapper;
 import dk.kea.studentdtoexception.model.Student;
 import dk.kea.studentdtoexception.repository.StudentRepository;
@@ -23,86 +24,19 @@ public class StudentService {
     }
 
     public List<StudentResponseDTO> getAllStudents() {
-        /*
-        List<Student> students = studentRepository.findAll();
-        List<StudentResponseDTO> studentResponseDTOs = new ArrayList<>();
-
-        // Using a for-loop to convert each Student to a StudentResponseDTO
-        for (Student student : students) {
-            StudentResponseDTO dto = new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
-            studentResponseDTOs.add(dto);
-        }
-
-        return studentResponseDTOs;
-        */
-        /*
-        // Using stream and map with lambda
-        return studentRepository.findAll().stream()
-                .map(student -> new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime()))
-                .collect(Collectors.toList());*/
         return studentRepository.findAll().stream()
                 .map(studentMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public StudentResponseDTO getStudentById(Long id) {
-        /*
         Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
-         */
-        /*
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-
-        // Throw RuntimeException if student is not found
-        if (optionalStudent.isEmpty()) {
-            throw new RuntimeException("Student not found with id " + id);
-        }
-
-        Student student = optionalStudent.get();
-
-        return new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
-         */
-        /*
-        // Using stream and map with lambda
-        return studentRepository.findById(id)
-                .map(student -> new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime()))
-                .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
-
-         */
-        Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+                .orElseThrow(() -> new StudentNotFoundException(id));
 
         return studentMapper.toDTO(student);
     }
 
     public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO) {
-        /*
-        Student student = new Student();
-        student.setName(studentRequestDTO.name());
-        student.setPassword(studentRequestDTO.password());
-        student.setBornDate(studentRequestDTO.bornDate());
-        student.setBornTime(studentRequestDTO.bornTime());
-         */
-        /*
-        // Use Builder to create student
-        Student student = Student.builder()
-                .name(studentRequestDTO.name())
-                .password(studentRequestDTO.password())
-                .bornDate(studentRequestDTO.bornDate())
-                .bornTime(studentRequestDTO.bornTime())
-                .build();
-        */
-        /*
-        Student student = new Student(
-                studentRequestDTO.name(),
-                studentRequestDTO.password(),
-                studentRequestDTO.bornDate(),
-                studentRequestDTO.bornTime()
-        );
-        student = studentRepository.save(student);
-
-        return new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
-         */
         Student newStudent = studentMapper.toEntity(studentRequestDTO);
         Student savedStudent = studentRepository.save(newStudent);
 
@@ -110,37 +44,18 @@ public class StudentService {
     }
 
     public StudentResponseDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO) {
-
         Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id " + id));
+                .orElseThrow(() -> new StudentNotFoundException(id));
 
         studentMapper.updateEntityFromDTO(student, studentRequestDTO);
         Student updatedStudent = studentRepository.save(student);
 
         return studentMapper.toDTO(updatedStudent);
-        /*
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-        // Throw RuntimeException if student is not found
-        if (optionalStudent.isEmpty()) {
-            throw new RuntimeException("Student not found with id " + id);
-        }
-
-        Student student = optionalStudent.get();
-
-        student.setName(studentRequestDTO.name());
-        student.setPassword(studentRequestDTO.password());
-        student.setBornDate(studentRequestDTO.bornDate());
-        student.setBornTime(studentRequestDTO.bornTime());
-
-        student = studentRepository.save(student);
-        return new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
-         */
-
     }
 
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new RuntimeException("Student not found with id " + id);
+            throw new StudentNotFoundException(id);
         }
         studentRepository.deleteById(id);
     }

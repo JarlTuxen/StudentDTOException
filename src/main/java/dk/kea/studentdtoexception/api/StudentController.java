@@ -21,43 +21,37 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<StudentResponseDTO> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudents() {
+        List<StudentResponseDTO> studentResponseDTOS = studentService.getAllStudents();
+        return ResponseEntity.ok(studentResponseDTOS);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable Long id) {
-        try {
-            StudentResponseDTO student = studentService.getStudentById(id);
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        StudentResponseDTO studentResponseDTO = studentService.getStudentById(id);
+        return ResponseEntity.ok(studentResponseDTO);
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponseDTO> createStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
+    public ResponseEntity<StudentResponseDTO> createStudent(
+            @RequestBody StudentRequestDTO studentRequestDTO
+    ) {
         StudentResponseDTO newStudent = studentService.createStudent(studentRequestDTO);
-        return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newStudent);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> updateStudent(@PathVariable Long id, @RequestBody StudentRequestDTO studentRequestDTO) {
-        try {
-            StudentResponseDTO updatedStudent = studentService.updateStudent(id, studentRequestDTO);
-            return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<StudentResponseDTO> updateStudent(
+            @PathVariable Long id,
+            @RequestBody StudentRequestDTO studentRequestDTO
+    ) {
+        StudentResponseDTO updatedStudent = studentService.updateStudent(id, studentRequestDTO);
+        return ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        try {
-            studentService.deleteStudent(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
     }
 }
